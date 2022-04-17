@@ -1,16 +1,19 @@
 package com.avalburo.test.models;
 
+import com.avalburo.test.utils.Utils;
+
 public class User {
 
-    int id;
+    String id;
     String name;
 
-    public int getId() {
-	return id;
+    public User(String name) {
+	id = Utils.generateUniqueId();
+	this.name = name;
     }
 
-    public void setId(int id) {
-	this.id = id;
+    public String getId() {
+	return id;
     }
 
     public String getName() {
@@ -19,6 +22,11 @@ public class User {
 
     public void setName(String name) {
 	this.name = name;
+    }
+
+    @Override
+    public String toString() {
+	return "User [id=" + id + ", name=" + name + "]";
     }
 
 }
