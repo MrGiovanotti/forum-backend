@@ -16,11 +16,7 @@ public class ForumStorage {
 
     private ForumStorage(String storageFilePath) {
 	this.storageFilePath = storageFilePath;
-	String jsonFileContent = FilesUtils.readFile(storageFilePath);
-	forum = gson.fromJson(jsonFileContent, Forum.class);
-	if (forum == null) {
-	    forum = new Forum();
-	}
+	forum = getForum();
     }
 
     public static ForumStorage getInstance(String storageFilePath) {
@@ -31,14 +27,35 @@ public class ForumStorage {
     }
 
     public Forum getForum() {
+	String jsonFileContent = FilesUtils.readFile(storageFilePath);
+	forum = gson.fromJson(jsonFileContent, Forum.class);
+	if (forum == null) {
+	    return new Forum();
+	}
 	return forum;
     }
 
     public void addComment(Comment comment) {
+	forum = getForum();
 	forum.getComments().add(comment);
+	save();
     }
 
-    public void save() {
+    public Comment findCommentById(String id) {
+	for (Comment comment : forum.getComments()) {
+	    if (comment.getId().equals(id)) {
+		return comment;
+	    }
+	}
+	return null;
+    }
+
+    public void replayComment(String id, Comment comment) {
+	findCommentById(id).getResponses().add(comment);
+	save();
+    }
+
+    private void save() {
 	String forumAsJson = gson.toJson(forum);
 	FilesUtils.writeFile(storageFilePath, forumAsJson);
     }

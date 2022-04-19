@@ -1,5 +1,6 @@
 package com.avalburo.test.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.avalburo.test.utils.DateUtils;
@@ -9,15 +10,17 @@ public class Comment {
 
     private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-    String id;
-    String content;
-    String date;
-    User user;
-    List<Comment> responses;
+    private String id;
+    private String content;
+    private String date;
+    private User user;
+    private List<Comment> responses;
 
-    public Comment() {
+    public Comment(String content) {
 	id = Utils.generateUniqueId();
 	date = DateUtils.getCurrentDateAsString(DATE_PATTERN);
+	this.content = content;
+	responses = new ArrayList<>();
     }
 
     public Comment(String content, User user, List<Comment> responses) {
@@ -38,6 +41,14 @@ public class Comment {
 
     public void setContent(String content) {
 	this.content = content;
+    }
+
+    public String getDate() {
+	return date;
+    }
+
+    public void setDate(String date) {
+	this.date = date;
     }
 
     public User getUser() {

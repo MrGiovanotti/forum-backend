@@ -19,13 +19,18 @@ public class ForumServiceImpl implements ForumService {
     public void addComment(Comment comment) {
 	ForumStorage forumStorage = ForumStorage.getInstance(properties.getStorageFilePath());
 	forumStorage.addComment(comment);
-	forumStorage.save();
     }
 
     @Override
     public Forum getForum() {
 	ForumStorage forumStorage = ForumStorage.getInstance(properties.getStorageFilePath());
 	return forumStorage.getForum();
+    }
+
+    @Override
+    public void replayComment(String id, Comment comment) {
+	ForumStorage forumStorage = ForumStorage.getInstance(properties.getStorageFilePath());
+	forumStorage.replayComment(id, comment);
     }
 
 }

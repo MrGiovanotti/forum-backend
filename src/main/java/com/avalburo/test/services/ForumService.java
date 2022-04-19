@@ -9,4 +9,6 @@ public interface ForumService {
 
     Forum getForum();
 
+    void replayComment(String id, Comment comment);
+
 }

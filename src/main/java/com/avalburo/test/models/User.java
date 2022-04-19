@@ -4,8 +4,8 @@ import com.avalburo.test.utils.Utils;
 
 public class User {
 
-    String id;
-    String name;
+    private String id;
+    private String name;
 
     public User(String name) {
 	id = Utils.generateUniqueId();
