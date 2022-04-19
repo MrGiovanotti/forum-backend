@@ -55,6 +55,20 @@ public class ForumStorage {
 	save();
     }
 
+    public Comment findResponseByCommentAndResponseId(String commentId, String responseId) {
+	for (Comment comment : findCommentById(commentId).getResponses()) {
+	    if (comment.getId().equals(responseId)) {
+		return comment;
+	    }
+	}
+	return null;
+    }
+
+    public void replayResponse(String commentId, String responseId, Comment comment) {
+	findResponseByCommentAndResponseId(commentId, responseId).getResponses().add(comment);
+	save();
+    }
+
     private void save() {
 	String forumAsJson = gson.toJson(forum);
 	FilesUtils.writeFile(storageFilePath, forumAsJson);

@@ -13,4 +13,8 @@ public interface ForumService {
 
     Comment findCommentById(String id);
 
+    Comment findResponseByCommentAndResponseId(String commentId, String responseId);
+
+    void replayResponse(String commentId, String responseId, Comment comment);
+
 }

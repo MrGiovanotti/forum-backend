@@ -39,4 +39,16 @@ public class ForumServiceImpl implements ForumService {
 	return forumStorage.findCommentById(id);
     }
 
+    @Override
+    public Comment findResponseByCommentAndResponseId(String commentId, String responseId) {
+	ForumStorage forumStorage = ForumStorage.getInstance(properties.getStorageFilePath());
+	return forumStorage.findResponseByCommentAndResponseId(commentId, responseId);
+    }
+
+    @Override
+    public void replayResponse(String commentId, String responseId, Comment comment) {
+	ForumStorage forumStorage = ForumStorage.getInstance(properties.getStorageFilePath());
+	forumStorage.replayResponse(commentId, responseId, comment);
+    }
+
 }

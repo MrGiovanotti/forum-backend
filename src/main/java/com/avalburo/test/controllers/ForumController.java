@@ -48,4 +48,18 @@ public class ForumController {
 	return forumService.findCommentById(id);
     }
 
+    @GetMapping("/response/{commentId}/{responseId}")
+    public Comment findResponseByCommentAndResponseId(@PathVariable String commentId, @PathVariable String responseId) {
+	return forumService.findResponseByCommentAndResponseId(commentId, responseId);
+    }
+
+    @PutMapping("/replay-response/{commentId}/{responseId}")
+    public void replayResponse(@PathVariable String commentId, @PathVariable String responseId,
+	    @RequestBody RequestHelper requestHelper) {
+	User user = new User(requestHelper.getName());
+	Comment comment = new Comment(requestHelper.getComment());
+	comment.setUser(user);
+	forumService.replayResponse(commentId, responseId, comment);
+    }
+
 }
