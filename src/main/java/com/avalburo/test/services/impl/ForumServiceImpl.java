@@ -33,4 +33,10 @@ public class ForumServiceImpl implements ForumService {
 	forumStorage.replayComment(id, comment);
     }
 
+    @Override
+    public Comment findCommentById(String id) {
+	ForumStorage forumStorage = ForumStorage.getInstance(properties.getStorageFilePath());
+	return forumStorage.findCommentById(id);
+    }
+
 }

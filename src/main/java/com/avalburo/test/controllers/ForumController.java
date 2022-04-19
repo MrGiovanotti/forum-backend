@@ -43,4 +43,9 @@ public class ForumController {
 	forumService.replayComment(id, comment);
     }
 
+    @GetMapping("/comment/{id}")
+    public Comment findCommentById(@PathVariable String id) {
+	return forumService.findCommentById(id);
+    }
+
 }

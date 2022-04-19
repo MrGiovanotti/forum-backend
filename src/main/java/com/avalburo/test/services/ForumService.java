@@ -11,4 +11,6 @@ public interface ForumService {
 
     void replayComment(String id, Comment comment);
 
+    Comment findCommentById(String id);
+
 }
